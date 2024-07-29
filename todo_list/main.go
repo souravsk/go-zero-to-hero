@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	_ "github.com/lib/pq"
 	"github.com/souravsk/go-zero-to-hero/internal/database"
 	"github.com/souravsk/go-zero-to-hero/internal/handler"
 )
