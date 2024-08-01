@@ -21,6 +21,11 @@ func GetTodos(c *gin.Context) {
 func CreateTodo(c *gin.Context) {
 	var todo models.Todo
 	if err := c.ShouldBindJSON(&todo); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	if err := models.CreateTodo(config.DB, &todo); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
@@ -30,15 +35,16 @@ func CreateTodo(c *gin.Context) {
 func GetTodoById(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Invalid ID"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
 		return
 	}
+
 	todo, err := models.GetTodoById(config.DB, uint(id))
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Todo not found"})
 		return
 	}
-	c.JSON(http.StatusCreated, todo)
+	c.JSON(http.StatusOK, todo)
 }
 
 func UpdateTodo(c *gin.Context) {

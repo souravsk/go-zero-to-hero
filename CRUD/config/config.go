@@ -1,19 +1,24 @@
 package config
 
 import (
+	"fmt"
 	"log"
 
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 var DB *gorm.DB
 
 func InitDB() {
 	var err error
-	DB, err = gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=crud sslmode=disable password=sourav")
+	fmt.Println("Starting the Database connection")
+	dsn := "host=db port=5432 user=postgres dbname=crud sslmode=disable password=sourav"
+	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{
+		Logger: logger.Default.LogMode(logger.Info),
+	})
 	if err != nil {
 		log.Fatal("Failed to connect to database: ", err)
 	}
-	DB.LogMode(true)
 }

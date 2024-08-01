@@ -1,12 +1,14 @@
 package models
 
-import "github.com/jinzhu/gorm"
+import (
+	"gorm.io/gorm"
+)
 
 type Todo struct {
 	gorm.Model
 	Title       string `json:"title"`
 	Description string `json:"description"`
-	Completed   string `json:"completed"`
+	Completed   bool   `json:"completed"` // Change to bool if you want true/false instead of a string
 }
 
 func GetAllTodos(db *gorm.DB) ([]Todo, error) {
