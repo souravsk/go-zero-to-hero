@@ -18,7 +18,7 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	config := models.config{
+	config := models.Config{
 		Host:     os.Getenv("DB_HOST"),
 		Port:     os.Getenv("DB_PORT"),
 		User:     os.Getenv("DB_USER"),
@@ -34,5 +34,5 @@ func main() {
 	routes.AuthRoutes(r)
 
 	//RUN the Server
-	r.RUN(":8080")
+	r.Run(":8080")
 }

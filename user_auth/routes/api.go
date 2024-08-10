@@ -4,13 +4,13 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	"k8s.io/apiserver/pkg/server/options/encryptionconfig/controller"
+	"github.com/souravsk/go-zero-to-hero/user_auth/controllers"
 )
 
 func AuthRoutes(r *gin.Engine) {
-	r.POST("/login", controller.Login)
-	r.POST("/singup", controller.Singup)
-	r.GET("/home", controller.Home)
-	r.GET("/premium", controller.Premium)
-	r.GET("/logout", controller.Logout)
+	r.POST("/login", controllers.Login)
+	r.POST("/singup", controllers.Signup)
+	r.GET("/home", controllers.Home)
+	r.GET("/premium", controllers.Premium)
+	r.GET("/logout", controllers.Logout)
 }
