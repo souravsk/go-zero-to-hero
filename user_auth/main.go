@@ -1,11 +1,9 @@
-package userauth
+package main
 
 import (
-	"log"
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 	"github.com/souravsk/go-zero-to-hero/user_auth/models"
 	"github.com/souravsk/go-zero-to-hero/user_auth/routes"
 )
@@ -13,11 +11,7 @@ import (
 func main() {
 	r := gin.Default()
 
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-
+	// Fetch environment variables from Docker
 	config := models.Config{
 		Host:     os.Getenv("DB_HOST"),
 		Port:     os.Getenv("DB_PORT"),
@@ -27,12 +21,12 @@ func main() {
 		SSLMode:  os.Getenv("DB_SSLMODE"),
 	}
 
-	//Initialize DB
+	// Initialize DB
 	models.InitDB(config)
 
-	//Load the router
+	// Load the router
 	routes.AuthRoutes(r)
 
-	//RUN the Server
+	// RUN the Server
 	r.Run(":8080")
 }

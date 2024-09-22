@@ -8,9 +8,9 @@ import (
 )
 
 func AuthRoutes(r *gin.Engine) {
-	r.POST("/login", controllers.Login)
-	r.POST("/singup", controllers.Signup)
-	r.GET("/home", controllers.Home)
-	r.GET("/premium", controllers.Premium)
-	r.GET("/logout", controllers.Logout)
+	r.POST("/user/login", controllers.Login)
+	r.POST("/user/singup", controllers.Signup)
+	r.GET("/user/home", controllers.Home)
+	r.GET("/user/premium", controllers.Premium)
+	r.GET("/user/logout", controllers.Logout)
 }

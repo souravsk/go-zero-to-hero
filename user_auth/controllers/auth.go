@@ -91,11 +91,11 @@ func Signup(c *gin.Context) {
 	// **********************Check if User Exists*******************************
 
 	var existingUser models.User
-
+	println(existingUser.ID, "existing user ID")
 	//  queries the database for a user with the given email.
 	models.DB.Where("email = ?", user.Email).First(&existingUser)
 
-	if existingUser.ID == 0 {
+	if existingUser.Email == user.Email {
 		c.JSON(400, gin.H{"error": "user already exists"})
 		return
 	}

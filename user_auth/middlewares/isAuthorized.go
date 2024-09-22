@@ -1,9 +1,8 @@
 package middlewares
 
 import (
-	"go-auth/utils"
-
 	"github.com/gin-gonic/gin"
+	"github.com/souravsk/go-zero-to-hero/user_auth/utils"
 )
 
 func IsAuthorized() gin.HandlerFunc {
